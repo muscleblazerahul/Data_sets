@@ -1,0 +1,14 @@
+const autoPlayLoop = function() {
+	if( window.Runner.instance_.tRex.jumping ) {
+		requestAnimationFrame(autoPlayLoop);
+		return;
+	}
+	const tRexPos = window.Runner.instance_.tRex.xPos;
+	const obstacles = window.Runner.instance_.horizon.obstacles;
+	const nextObstacle = obstacles.find(o => o.xPos > tRexPos);
+	if( nextObstacle && ( nextObstacle.xPos - tRexPos ) <= 120 ) {
+		window.Runner.instance_.tRex.startJump(50)
+	}
+	requestAnimationFrame(autoPlayLoop);
+}
+requestAnimationFrame(autoPlayLoop);
